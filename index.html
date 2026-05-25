@@ -6,21 +6,16 @@
 <title>ONINME Fan Microphone</title>
 
 <style>
-
 body{
     margin:0;
     overflow:hidden;
-
     width:100vw;
     height:100vh;
-
     background-image:url("background.png");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-
     font-family:Arial,sans-serif;
-
     touch-action:none;
 }
 
@@ -30,312 +25,196 @@ body{
     height:100%;
 }
 
-/* =========================
-   CHARACTER
-========================= */
+/* NHÂN VẬT */
 
 .character{
     position:absolute;
-
     left:35%;
     top:50%;
-
     width:min(42vw,420px);
-
-    transform:
-        translate(-50%,-50%);
+    transform:translate(-50%,-50%);
 }
 
 .character-img{
     width:100%;
-
     display:block;
-
     user-select:none;
     pointer-events:none;
 }
 
-/* =========================
-   MOUTH
-========================= */
+/* MIỆNG */
 
 .mouth{
     position:absolute;
-
     left:202px;
     top:200px;
-
     width:120px;
     height:24px;
-
     transform-origin:center center;
-
     z-index:20;
-
     cursor:move;
-
     touch-action:none;
 }
 
-/* =========================
-   FAN
-========================= */
+/* QUẠT */
 
 .fan{
     position:absolute;
-
     right:12%;
     bottom:10%;
-
     width:min(26vw,260px);
     height:min(36vw,360px);
-
     transform-origin:center center;
-
     cursor:move;
-
     touch-action:none;
 }
 
-/* FAN HEAD */
-
 .fan-head{
     position:absolute;
-
     top:0;
     left:50%;
-
     transform:translateX(-50%);
-
     width:230px;
     height:230px;
-
     border-radius:50%;
-
     border:8px solid #444;
-
-    background:
-        rgba(220,220,220,0.9);
-
+    background:rgba(220,220,220,0.9);
     display:flex;
     justify-content:center;
     align-items:center;
-
     overflow:hidden;
 }
 
-/* LOGO */
-
 .fan-logo{
     position:absolute;
-
     top:12px;
     left:50%;
-
     transform:translateX(-50%);
-
     font-size:20px;
-
     font-weight:bold;
-
     color:#111;
-
     z-index:30;
-
     letter-spacing:2px;
-
-    text-shadow:
-        1px 1px 2px rgba(255,255,255,0.8);
+    text-shadow:1px 1px 2px rgba(255,255,255,0.8);
 }
-
-/* GRILL */
 
 .grill{
     position:absolute;
-
     width:100%;
     height:100%;
-
     border-radius:50%;
-
-    background:
-        repeating-radial-gradient(
-            circle,
-            transparent 0px,
-            transparent 10px,
-            rgba(0,0,0,0.15) 11px,
-            rgba(0,0,0,0.15) 12px
-        );
-
+    background:repeating-radial-gradient(
+        circle,
+        transparent 0px,
+        transparent 10px,
+        rgba(0,0,0,0.15) 11px,
+        rgba(0,0,0,0.15) 12px
+    );
     z-index:5;
-
     pointer-events:none;
 }
 
-/* BLADES */
-
 .blades{
     position:relative;
-
     width:150px;
     height:150px;
-
     transform:rotate(0deg);
 }
-
-/* BLADE */
 
 .blade{
     position:absolute;
-
     width:22px;
     height:105px;
-
     background:#777;
-
     border-radius:40px;
-
     left:64px;
     top:0;
-
     transform-origin:center 75px;
 }
 
-.blade:nth-child(1){
-    transform:rotate(0deg);
-}
-
-.blade:nth-child(2){
-    transform:rotate(120deg);
-}
-
-.blade:nth-child(3){
-    transform:rotate(240deg);
-}
-
-/* CENTER */
+.blade:nth-child(1){ transform:rotate(0deg); }
+.blade:nth-child(2){ transform:rotate(120deg); }
+.blade:nth-child(3){ transform:rotate(240deg); }
 
 .fan-center{
     position:absolute;
-
     width:36px;
     height:36px;
-
     background:#222;
-
     border-radius:50%;
-
     left:57px;
     top:57px;
-
     z-index:10;
 }
 
-/* STAND */
-
 .stand{
     position:absolute;
-
     width:18px;
     height:100px;
-
     background:#555;
-
     left:50%;
     top:225px;
-
     transform:translateX(-50%);
 }
-
-/* BASE */
 
 .base{
     position:absolute;
-
     width:140px;
     height:28px;
-
     background:#333;
-
     border-radius:50px;
-
     left:50%;
     top:315px;
-
     transform:translateX(-50%);
 }
 
-/* =========================
-   CONTROLS
-========================= */
+/* NÚT */
 
 .controls{
     position:absolute;
-
     left:50%;
     bottom:25px;
-
     transform:translateX(-50%);
-
-    background:
-        rgba(255,255,255,0.9);
-
+    background:rgba(255,255,255,0.9);
     padding:15px;
-
     border-radius:15px;
-
     border:3px solid #222;
-
     z-index:100;
 }
 
 button{
     padding:10px 18px;
-
     font-size:16px;
-
     margin:5px;
-
     border:none;
-
     border-radius:10px;
-
     background:#2f9fff;
-
     color:white;
-
     font-weight:bold;
-
     cursor:pointer;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media (max-width:768px){
 
     .character{
         left:50%;
         top:58%;
-
         width:60vw;
     }
 
     .fan{
         width:38vw;
         height:52vw;
-
         right:auto;
         left:55%;
-
         bottom:8%;
     }
 
     .fan-head{
         width:34vw;
         height:34vw;
-
         border-width:1.2vw;
     }
 
@@ -347,16 +226,13 @@ button{
     .blade{
         width:3vw;
         height:15vw;
-
         left:9.5vw;
-
         transform-origin:center 11vw;
     }
 
     .fan-center{
         width:5vw;
         height:5vw;
-
         left:8.5vw;
         top:8.5vw;
     }
@@ -364,14 +240,12 @@ button{
     .stand{
         width:3vw;
         height:20vw;
-
         top:34vw;
     }
 
     .base{
         width:24vw;
         height:5vw;
-
         top:52vw;
     }
 
@@ -381,12 +255,9 @@ button{
     }
 
     .controls{
-        transform:
-            translateX(-50%)
-            scale(0.75);
+        transform:translateX(-50%) scale(0.75);
     }
 }
-
 </style>
 </head>
 
@@ -394,45 +265,22 @@ button{
 
 <div class="scene">
 
-    <!-- CHARACTER -->
-
     <div class="character" id="character">
-
-        <img
-            src="idle1.png"
-            class="character-img"
-            id="characterImage"
-        >
-
-        <img
-            src="mouth.png"
-            class="mouth"
-            id="mouth"
-        >
-
+        <img src="idle1.png" class="character-img" id="characterImage">
+        <img src="mouth.png" class="mouth" id="mouth">
     </div>
-
-    <!-- FAN -->
 
     <div class="fan" id="fan">
 
         <div class="fan-head">
 
-            <div class="fan-logo">
-                ONINME
-            </div>
+            <div class="fan-logo">ONINME</div>
 
-            <div
-                class="blades"
-                id="blades"
-            >
-
+            <div class="blades" id="blades">
                 <div class="blade"></div>
                 <div class="blade"></div>
                 <div class="blade"></div>
-
                 <div class="fan-center"></div>
-
             </div>
 
             <div class="grill"></div>
@@ -440,59 +288,25 @@ button{
         </div>
 
         <div class="stand"></div>
-
         <div class="base"></div>
 
     </div>
 
-    <!-- BUTTONS -->
-
     <div class="controls">
-
-        <button onclick="startMicrophone()">
-            Bật Micro
-        </button>
-
-        <button onclick="stopMicrophone()">
-            Tắt Micro
-        </button>
-
-        <button onclick="resetMouth()">
-            Reset Mouth
-        </button>
-
-        <button onclick="resetFan()">
-            Reset Fan
-        </button>
-
+        <button onclick="startMicrophone()">Bật Micro</button>
+        <button onclick="stopMicrophone()">Tắt Micro</button>
+        <button onclick="resetMouth()">Reset Mouth</button>
+        <button onclick="resetFan()">Reset Fan</button>
     </div>
 
 </div>
 
 <script>
-
-/* =========================
-   DOM
-========================= */
-
-const mouth =
-    document.getElementById("mouth");
-
-const fan =
-    document.getElementById("fan");
-
-const blades =
-    document.getElementById("blades");
-
-const character =
-    document.getElementById("character");
-
-const characterImage =
-    document.getElementById("characterImage");
-
-/* =========================
-   AUDIO
-========================= */
+const mouth = document.getElementById("mouth");
+const fan = document.getElementById("fan");
+const blades = document.getElementById("blades");
+const character = document.getElementById("character");
+const characterImage = document.getElementById("characterImage");
 
 let audioContext;
 let analyser;
@@ -501,18 +315,10 @@ let dataArray;
 let animationId;
 let micStream;
 
-/* =========================
-   FAN ROTATION
-========================= */
-
 let fanAngle = 0;
+let lastTime = performance.now();
 
-let lastTime =
-    performance.now();
-
-/* =========================
-   IDLE ANIMATION
-========================= */
+/* IDLE NHÂN VẬT */
 
 const idleFrames = [
     "idle1.png",
@@ -524,253 +330,145 @@ const idleFrames = [
 let idleIndex = 0;
 
 setInterval(function(){
-
     idleIndex++;
 
     if(idleIndex >= idleFrames.length){
-
         idleIndex = 0;
     }
 
-    characterImage.src =
-        idleFrames[idleIndex];
-
+    characterImage.src = idleFrames[idleIndex];
 },180);
 
-/* =========================
-   MOUTH
-========================= */
+/* MIỆNG */
 
 let mouthX = 202;
 let mouthY = 200;
-
 let mouthScale = 1;
 let talkingScale = 1;
 
 let draggingMouth = false;
-
 let mouthOffsetX = 0;
 let mouthOffsetY = 0;
 
 function updateMouthPosition(){
-
-    mouth.style.left =
-        mouthX + "px";
-
-    mouth.style.top =
-        mouthY + "px";
+    mouth.style.left = mouthX + "px";
+    mouth.style.top = mouthY + "px";
 }
 
 function updateMouthTransform(){
-
     mouth.style.transform =
-
-        `translate(-50%,0)
-         scaleX(${mouthScale})
-         scaleY(${talkingScale * mouthScale})`;
+        `translate(-50%,0) scaleX(${mouthScale}) scaleY(${talkingScale * mouthScale})`;
 }
 
-/* PC DRAG */
+/* PC KÉO MIỆNG */
 
-mouth.addEventListener(
-    "mousedown",
-    function(e){
+mouth.addEventListener("mousedown", function(e){
+    draggingMouth = true;
 
-        draggingMouth = true;
+    const rect = mouth.getBoundingClientRect();
 
-        const rect =
-            mouth.getBoundingClientRect();
+    mouthOffsetX = e.clientX - rect.left;
+    mouthOffsetY = e.clientY - rect.top;
 
-        mouthOffsetX =
-            e.clientX - rect.left;
+    e.preventDefault();
+});
 
-        mouthOffsetY =
-            e.clientY - rect.top;
+/* PC ZOOM MIỆNG */
 
-        e.preventDefault();
+mouth.addEventListener("wheel", function(e){
+    e.preventDefault();
+
+    if(e.deltaY < 0){
+        mouthScale += 0.05;
+    }else{
+        mouthScale -= 0.05;
     }
-);
 
-/* PC ZOOM */
+    if(mouthScale < 0.1) mouthScale = 0.1;
+    if(mouthScale > 10) mouthScale = 10;
 
-mouth.addEventListener(
-    "wheel",
-    function(e){
+    updateMouthTransform();
 
-        e.preventDefault();
+},{passive:false});
 
-        if(e.deltaY < 0){
+/* MOBILE MIỆNG */
 
-            mouthScale += 0.05;
+let lastMouthTouchDistance = 0;
 
-        }else{
+mouth.addEventListener("touchstart", function(e){
+    e.preventDefault();
+    e.stopPropagation();
 
-            mouthScale -= 0.05;
-        }
+    draggingMouth = true;
+    draggingFan = false;
+    draggingCharacter = false;
 
-        if(mouthScale < 0.1)
-            mouthScale = 0.1;
+    if(e.touches.length === 1){
+        const touch = e.touches[0];
+        const rect = mouth.getBoundingClientRect();
 
-        if(mouthScale > 10)
-            mouthScale = 10;
+        mouthOffsetX = touch.clientX - rect.left;
+        mouthOffsetY = touch.clientY - rect.top;
+    }
 
-        updateMouthTransform();
+    if(e.touches.length === 2){
+        lastMouthTouchDistance = getTouchDistance(e.touches[0], e.touches[1]);
+    }
 
-    },
-    { passive:false }
-);
+},{passive:false});
 
-/* MOBILE TOUCH */
+mouth.addEventListener("touchmove", function(e){
+    e.preventDefault();
+    e.stopPropagation();
 
-let lastTouchDistance = 0;
+    const parentRect = character.getBoundingClientRect();
 
-mouth.addEventListener(
-    "touchstart",
-    function(e){
+    if(e.touches.length === 1){
+        const touch = e.touches[0];
 
-        e.preventDefault();
+        mouthX =
+            touch.clientX
+            - parentRect.left
+            - mouthOffsetX
+            + mouth.offsetWidth / 2;
 
-        draggingMouth = true;
+        mouthY =
+            touch.clientY
+            - parentRect.top
+            - mouthOffsetY;
 
-        if(e.touches.length === 1){
+        updateMouthPosition();
+    }
 
-            const touch =
-                e.touches[0];
+    if(e.touches.length === 2){
+        const newDistance = getTouchDistance(e.touches[0], e.touches[1]);
 
-            const rect =
-                mouth.getBoundingClientRect();
-
-            mouthOffsetX =
-                touch.clientX - rect.left;
-
-            mouthOffsetY =
-                touch.clientY - rect.top;
-        }
-
-        if(e.touches.length === 2){
-
-            lastTouchDistance =
-
-                getTouchDistance(
-                    e.touches[0],
-                    e.touches[1]
-                );
-        }
-
-    },
-    { passive:false }
-);
-
-mouth.addEventListener(
-    "touchmove",
-    function(e){
-
-        e.preventDefault();
-
-        const parentRect =
-            character.getBoundingClientRect();
-
-        /* MOVE */
-
-        if(e.touches.length === 1){
-
-            const touch =
-                e.touches[0];
-
-            mouthX =
-
-                touch.clientX
-                - parentRect.left
-                - mouthOffsetX
-                + mouth.offsetWidth / 2;
-
-            mouthY =
-
-                touch.clientY
-                - parentRect.top
-                - mouthOffsetY;
-
-            updateMouthPosition();
-        }
-
-        /* ZOOM */
-
-        if(e.touches.length === 2){
-
-            const newDistance =
-
-                getTouchDistance(
-                    e.touches[0],
-                    e.touches[1]
-                );
-
-            if(lastTouchDistance > 0){
-
-                if(newDistance > lastTouchDistance){
-
-                    mouthScale += 0.03;
-
-                }else{
-
-                    mouthScale -= 0.03;
-                }
-
-                if(mouthScale < 0.1)
-                    mouthScale = 0.1;
-
-                if(mouthScale > 10)
-                    mouthScale = 10;
-
-                updateMouthTransform();
+        if(lastMouthTouchDistance > 0){
+            if(newDistance > lastMouthTouchDistance){
+                mouthScale += 0.03;
+            }else{
+                mouthScale -= 0.03;
             }
 
-            lastTouchDistance =
-                newDistance;
+            if(mouthScale < 0.1) mouthScale = 0.1;
+            if(mouthScale > 10) mouthScale = 10;
+
+            updateMouthTransform();
         }
 
-    },
-    { passive:false }
-);
+        lastMouthTouchDistance = newDistance;
+    }
 
-mouth.addEventListener(
-    "touchend",
-    function(){
+},{passive:false});
 
-        draggingMouth = false;
-
-        lastTouchDistance = 0;
-
-    },
-    { passive:false }
-);
-
-/* DISTANCE */
-
-function getTouchDistance(
-    touch1,
-    touch2
-){
-
-    const dx =
-        touch1.clientX
-        - touch2.clientX;
-
-    const dy =
-        touch1.clientY
-        - touch2.clientY;
-
-    return Math.sqrt(
-        dx * dx + dy * dy
-    );
-}
-
-/* RESET */
+mouth.addEventListener("touchend", function(){
+    draggingMouth = false;
+    lastMouthTouchDistance = 0;
+},{passive:false});
 
 function resetMouth(){
-
     mouthX = 202;
     mouthY = 200;
-
     mouthScale = 1;
     talkingScale = 1;
 
@@ -778,433 +476,306 @@ function resetMouth(){
     updateMouthTransform();
 }
 
-/* =========================
-   FAN
-========================= */
+/* QUẠT */
 
 let fanX = 0;
 let fanY = 0;
-
 let fanScale = 1;
 
 let draggingFan = false;
-
 let fanOffsetX = 0;
 let fanOffsetY = 0;
 
 function updateFanPosition(){
-
     fan.style.transform =
-
-        `translate(${fanX}px, ${fanY}px)
-         scale(${fanScale})`;
+        `translate(${fanX}px, ${fanY}px) scale(${fanScale})`;
 }
 
-/* PC FAN */
+/* PC KÉO QUẠT */
 
-fan.addEventListener(
-    "mousedown",
-    function(e){
+fan.addEventListener("mousedown", function(e){
+    draggingFan = true;
 
-        draggingFan = true;
+    fanOffsetX = e.clientX - fanX;
+    fanOffsetY = e.clientY - fanY;
 
-        fanOffsetX =
-            e.clientX - fanX;
+    e.preventDefault();
+});
 
-        fanOffsetY =
-            e.clientY - fanY;
+/* PC ZOOM QUẠT */
 
-        e.preventDefault();
+fan.addEventListener("wheel", function(e){
+    e.preventDefault();
+
+    if(e.deltaY < 0){
+        fanScale += 0.05;
+    }else{
+        fanScale -= 0.05;
     }
-);
 
-/* MOBILE FAN */
+    if(fanScale < 0.1) fanScale = 0.1;
+    if(fanScale > 10) fanScale = 10;
 
-fan.addEventListener(
-    "touchstart",
-    function(e){
+    updateFanPosition();
 
-        e.preventDefault();
+},{passive:false});
 
-        draggingFan = true;
+/* MOBILE KÉO + ZOOM QUẠT */
 
-        const touch =
-            e.touches[0];
+let lastFanTouchDistance = 0;
 
-        fanOffsetX =
-            touch.clientX - fanX;
+fan.addEventListener("touchstart", function(e){
+    e.preventDefault();
+    e.stopPropagation();
 
-        fanOffsetY =
-            touch.clientY - fanY;
+    draggingFan = true;
+    draggingMouth = false;
+    draggingCharacter = false;
 
-    },
-    { passive:false }
-);
+    if(e.touches.length === 1){
+        const touch = e.touches[0];
 
-/* FAN ZOOM */
+        fanOffsetX = touch.clientX - fanX;
+        fanOffsetY = touch.clientY - fanY;
+    }
 
-fan.addEventListener(
-    "wheel",
-    function(e){
+    if(e.touches.length === 2){
+        lastFanTouchDistance = getTouchDistance(e.touches[0], e.touches[1]);
+    }
 
-        e.preventDefault();
+},{passive:false});
 
-        if(e.deltaY < 0){
+fan.addEventListener("touchmove", function(e){
+    e.preventDefault();
+    e.stopPropagation();
 
-            fanScale += 0.05;
+    if(e.touches.length === 1){
+        const touch = e.touches[0];
 
-        }else{
-
-            fanScale -= 0.05;
-        }
+        fanX = touch.clientX - fanOffsetX;
+        fanY = touch.clientY - fanOffsetY;
 
         updateFanPosition();
+    }
 
-    },
-    { passive:false }
-);
+    if(e.touches.length === 2){
+        const newDistance = getTouchDistance(e.touches[0], e.touches[1]);
+
+        if(lastFanTouchDistance > 0){
+            if(newDistance > lastFanTouchDistance){
+                fanScale += 0.02;
+            }else{
+                fanScale -= 0.02;
+            }
+
+            if(fanScale < 0.1) fanScale = 0.1;
+            if(fanScale > 10) fanScale = 10;
+
+            updateFanPosition();
+        }
+
+        lastFanTouchDistance = newDistance;
+    }
+
+},{passive:false});
+
+fan.addEventListener("touchend", function(){
+    draggingFan = false;
+    lastFanTouchDistance = 0;
+},{passive:false});
 
 function resetFan(){
-
     fanX = 0;
     fanY = 0;
-
     fanScale = 1;
 
     updateFanPosition();
 }
 
-/* =========================
-   CHARACTER MOVE
-========================= */
+/* NHÂN VẬT TRÊN ĐIỆN THOẠI */
 
 let draggingCharacter = false;
-
 let characterX = 0;
 let characterY = 0;
-
 let characterOffsetX = 0;
 let characterOffsetY = 0;
 
 function updateCharacterPosition(){
-
     character.style.transform =
-
-        `translate(-50%,-50%)
-         translate(${characterX}px, ${characterY}px)`;
+        `translate(-50%,-50%) translate(${characterX}px, ${characterY}px)`;
 }
 
-/* TOUCH */
+character.addEventListener("touchstart", function(e){
+    if(e.target === mouth) return;
 
-character.addEventListener(
-    "touchstart",
-    function(e){
+    e.preventDefault();
 
-        if(e.target === mouth) return;
+    draggingCharacter = true;
+    draggingFan = false;
+    draggingMouth = false;
 
+    const touch = e.touches[0];
+    const rect = character.getBoundingClientRect();
+
+    characterOffsetX = touch.clientX - rect.left;
+    characterOffsetY = touch.clientY - rect.top;
+
+},{passive:false});
+
+/* MOVE CHUNG */
+
+document.addEventListener("mousemove", function(e){
+
+    if(draggingMouth){
+        const parentRect = character.getBoundingClientRect();
+
+        mouthX =
+            e.clientX
+            - parentRect.left
+            - mouthOffsetX
+            + mouth.offsetWidth / 2;
+
+        mouthY =
+            e.clientY
+            - parentRect.top
+            - mouthOffsetY;
+
+        updateMouthPosition();
+    }
+
+    if(draggingFan){
+        fanX = e.clientX - fanOffsetX;
+        fanY = e.clientY - fanOffsetY;
+
+        updateFanPosition();
+    }
+});
+
+document.addEventListener("touchmove", function(e){
+
+    if(draggingCharacter && e.touches.length === 1){
         e.preventDefault();
 
-        draggingCharacter = true;
+        const touch = e.touches[0];
 
-        const touch =
-            e.touches[0];
+        characterX =
+            touch.clientX
+            - window.innerWidth * 0.35
+            - characterOffsetX;
 
-        const rect =
-            character.getBoundingClientRect();
+        characterY =
+            touch.clientY
+            - window.innerHeight * 0.50
+            - characterOffsetY;
 
-        characterOffsetX =
-            touch.clientX - rect.left;
-
-        characterOffsetY =
-            touch.clientY - rect.top;
-
-    },
-    { passive:false }
-);
-
-/* =========================
-   GLOBAL MOVE
-========================= */
-
-document.addEventListener(
-    "mousemove",
-    function(e){
-
-        if(draggingMouth){
-
-            const parentRect =
-                character.getBoundingClientRect();
-
-            mouthX =
-
-                e.clientX
-                - parentRect.left
-                - mouthOffsetX
-                + mouth.offsetWidth / 2;
-
-            mouthY =
-
-                e.clientY
-                - parentRect.top
-                - mouthOffsetY;
-
-            updateMouthPosition();
-        }
-
-        if(draggingFan){
-
-            fanX =
-                e.clientX - fanOffsetX;
-
-            fanY =
-                e.clientY - fanOffsetY;
-
-            updateFanPosition();
-        }
-
+        updateCharacterPosition();
     }
-);
 
-/* MOBILE MOVE */
+},{passive:false});
 
-document.addEventListener(
-    "touchmove",
-    function(e){
+document.addEventListener("mouseup", function(){
+    draggingMouth = false;
+    draggingFan = false;
+});
 
-        /* CHARACTER */
+document.addEventListener("touchend", function(){
+    draggingCharacter = false;
+});
 
-        if(
-            draggingCharacter &&
-            e.touches.length === 1
-        ){
+/* KHOẢNG CÁCH 2 NGÓN */
 
-            const touch =
-                e.touches[0];
+function getTouchDistance(touch1, touch2){
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
 
-            characterX =
+    return Math.sqrt(dx * dx + dy * dy);
+}
 
-                touch.clientX
-                - window.innerWidth * 0.35
-                - characterOffsetX;
-
-            characterY =
-
-                touch.clientY
-                - window.innerHeight * 0.50
-                - characterOffsetY;
-
-            updateCharacterPosition();
-        }
-
-        /* FAN */
-
-        if(
-            draggingFan &&
-            e.touches.length === 1
-        ){
-
-            const touch =
-                e.touches[0];
-
-            fanX =
-                touch.clientX - fanOffsetX;
-
-            fanY =
-                touch.clientY - fanOffsetY;
-
-            updateFanPosition();
-        }
-
-    },
-    { passive:false }
-);
-
-/* RELEASE */
-
-document.addEventListener(
-    "mouseup",
-    function(){
-
-        draggingMouth = false;
-        draggingFan = false;
-    }
-);
-
-document.addEventListener(
-    "touchend",
-    function(){
-
-        draggingCharacter = false;
-        draggingFan = false;
-    }
-);
-
-/* =========================
-   MICROPHONE
-========================= */
+/* MICROPHONE */
 
 async function startMicrophone(){
-
     try{
-
         if(micStream){
-
-            micStream
-            .getTracks()
-            .forEach(track => track.stop());
+            micStream.getTracks().forEach(track => track.stop());
         }
 
-        micStream =
+        micStream = await navigator.mediaDevices.getUserMedia({
+            audio:true
+        });
 
-            await navigator
-            .mediaDevices
-            .getUserMedia({
-                audio:true
-            });
-
-        audioContext =
-            new AudioContext();
-
-        analyser =
-            audioContext.createAnalyser();
-
-        microphone =
-
-            audioContext
-            .createMediaStreamSource(
-                micStream
-            );
+        audioContext = new AudioContext();
+        analyser = audioContext.createAnalyser();
+        microphone = audioContext.createMediaStreamSource(micStream);
 
         microphone.connect(analyser);
 
         analyser.fftSize = 1024;
+        dataArray = new Uint8Array(analyser.fftSize);
 
-        dataArray =
+        cancelAnimationFrame(animationId);
 
-            new Uint8Array(
-                analyser.fftSize
-            );
-
-        cancelAnimationFrame(
-            animationId
-        );
-
-        lastTime =
-            performance.now();
+        lastTime = performance.now();
 
         animateByMicrophone();
 
     }catch(error){
-
-        alert(
-            "Không bật được microphone"
-        );
+        alert("Không bật được microphone");
     }
 }
 
 function stopMicrophone(){
-
-    cancelAnimationFrame(
-        animationId
-    );
+    cancelAnimationFrame(animationId);
 
     if(micStream){
-
-        micStream
-        .getTracks()
-        .forEach(track => track.stop());
+        micStream.getTracks().forEach(track => track.stop());
     }
 
     talkingScale = 1;
-
     updateMouthTransform();
 }
 
-/* =========================
-   ANIMATION
-========================= */
+/* ANIMATION */
 
 function animateByMicrophone(){
-
-    analyser.getByteTimeDomainData(
-        dataArray
-    );
+    analyser.getByteTimeDomainData(dataArray);
 
     let sum = 0;
 
-    for(
-        let i = 0;
-        i < dataArray.length;
-        i++
-    ){
-
-        let value =
-
-            (dataArray[i] - 128)
-            / 128;
-
+    for(let i = 0; i < dataArray.length; i++){
+        let value = (dataArray[i] - 128) / 128;
         sum += Math.abs(value);
     }
 
-    let average =
-        sum / dataArray.length;
+    let average = sum / dataArray.length;
 
-    /* MOUTH */
+    talkingScale = 1 + average * 12;
 
-    talkingScale =
-
-        1 + average * 12;
-
-    if(talkingScale < 1)
-        talkingScale = 1;
-
-    if(talkingScale > 3)
-        talkingScale = 3;
+    if(talkingScale < 1) talkingScale = 1;
+    if(talkingScale > 3) talkingScale = 3;
 
     updateMouthTransform();
 
-    /* FAN */
+    let speed = 0.02 + average * 3;
 
-    let speed =
-
-        0.02 + average * 3;
-
-    let now =
-        performance.now();
-
-    let deltaTime =
-
-        (now - lastTime)
-        / 1000;
-
+    let now = performance.now();
+    let deltaTime = (now - lastTime) / 1000;
     lastTime = now;
 
-    let rotationSpeed =
-        speed * 1200;
+    let rotationSpeed = speed * 1200;
 
-    fanAngle +=
-        rotationSpeed * deltaTime;
+    fanAngle += rotationSpeed * deltaTime;
 
-    blades.style.transform =
+    blades.style.transform = `rotate(${fanAngle}deg)`;
 
-        `rotate(${fanAngle}deg)`;
-
-    animationId =
-
-        requestAnimationFrame(
-            animateByMicrophone
-        );
+    animationId = requestAnimationFrame(animateByMicrophone);
 }
 
-/* =========================
-   START
-========================= */
+/* KHỞI ĐỘNG */
 
 updateMouthPosition();
 updateMouthTransform();
 updateFanPosition();
 updateCharacterPosition();
-
 </script>
 
 </body>
