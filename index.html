@@ -200,13 +200,15 @@ button:hover{
     .fan{
         width:38vw;
         height:52vw;
-        right:2%;
+        right:auto;
+        left:55%;
         bottom:8%;
     }
 
     .fan-head{
         width:34vw;
         height:34vw;
+        border-width:1.2vw;
     }
 
     .blades{
@@ -383,7 +385,7 @@ function resetMouth(){
     updateMouthTransform();
 }
 
-let fanX = -550;
+let fanX = 0;
 let fanY = 0;
 let fanScale = 1;
 
@@ -422,7 +424,7 @@ fan.addEventListener("wheel", function(e){
 },{passive:false});
 
 function resetFan(){
-    fanX = -550;
+    fanX = 0;
     fanY = 0;
     fanScale = 1;
 
