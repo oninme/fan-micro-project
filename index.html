@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nhân Vật + Quạt Theo Microphone</title>
+
+<style>
+body{
+    margin:0;
+
+    background-image:url("background.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    overflow:hidden;
+
+    width:100vw;
+    height:100vh;
+
+    font-family:Arial,sans-serif;
+}
+
+.scene{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+/* =========================
+   NHÂN VẬT
+========================= */
+
+.character{
+    position:absolute;
+
+    left:35%;
+    top:50%;
+
+    width:420px;
+
+    transform:translate(-50%,-50%);
+}
+
+.character-img{
+    width:100%;
+    display:block;
+
+    user-select:none;
+    pointer-events:none;
+}
+
+/* =========================
+   MOUTH
+========================= */
+
+.mouth{
+    position:absolute;
+
+    left:202px;
+    top:200px;
+
+    width:120px;
+    height:24px;
+
+    transform-origin:center center;
+
+    cursor:move;
+
+    z-index:20;
+}
+
+/* =========================
+   QUẠT
+========================= */
+
+.fan{
+    position:absolute;
+
+    right:12%;
+    bottom:10%;
+
+    width:260px;
+    height:360px;
+
+    cursor:move;
+
+    transform-origin:center center;
+}
+
+/* ĐẦU QUẠT */
+
+.fan-head{
+    position:absolute;
+
+    top:0;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:230px;
+    height:230px;
+
+    border-radius:50%;
+
+    border:8px solid #444;
+
+    background:rgba(220,220,220,0.9);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+/* LOGO QUẠT */
+
+.fan-logo{
+    position:absolute;
+
+    top:12px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#111;
+
+    z-index:30;
+
+    letter-spacing:2px;
+
+    text-shadow:
+        1px 1px 2px rgba(255,255,255,0.8);
+}
+
+/* LỒNG QUẠT */
+
+.grill{
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    background:
+    repeating-radial-gradient(
+        circle,
+        transparent 0px,
+        transparent 10px,
+        rgba(0,0,0,0.15) 11px,
+        rgba(0,0,0,0.15) 12px
+    );
+
+    z-index:5;
+
+    pointer-events:none;
+}
+
+/* CÁNH QUẠT */
+
+.blades{
+    position:relative;
+
+    width:150px;
+    height:150px;
+
+    transform:rotate(0deg);
+}
+
+/* CÁNH HẸP */
+
+.blade{
+    position:absolute;
+
+    width:22px;
+    height:105px;
+
+    background:#777;
+
+    border-radius:40px;
+
+    left:64px;
+    top:0;
+
+    transform-origin:center 75px;
+}
+
+.blade:nth-child(1){
+    transform:rotate(0deg);
+}
+
+.blade:nth-child(2){
+    transform:rotate(120deg);
+}
+
+.blade:nth-child(3){
+    transform:rotate(240deg);
+}
+
+/* TÂM QUẠT */
+
+.fan-center{
+    position:absolute;
+
+    width:36px;
+    height:36px;
+
+    background:#222;
+
+    border-radius:50%;
+
+    left:57px;
+    top:57px;
+
+    z-index:10;
+}
+
+/* CHÂN QUẠT */
+
+.stand{
+    position:absolute;
+
+    width:18px;
+    height:100px;
+
+    background:#555;
+
+    left:50%;
+    top:225px;
+
+    transform:translateX(-50%);
+}
+
+/* ĐẾ QUẠT */
+
+.base{
+    position:absolute;
+
+    width:140px;
+    height:28px;
+
+    background:#333;
+
+    border-radius:50px;
+
+    left:50%;
+    top:315px;
+
+    transform:translateX(-50%);
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+    position:absolute;
+
+    left:50%;
+    bottom:25px;
+
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,0.9);
+
+    padding:15px;
+
+    border-radius:15px;
+
+    border:3px solid #222;
+
+    text-align:center;
+
+    z-index:100;
+}
+
+button{
+    padding:10px 18px;
+
+    font-size:16px;
+
+    margin:5px;
+
+    cursor:pointer;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2f9fff;
+
+    color:white;
+
+    font-weight:bold;
+}
+
+button:hover{
+    background:#197fe0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+    <!-- NHÂN VẬT -->
+
+    <div class="character" id="character">
+
+        <img
+            src="idle1.png"
+            class="character-img"
+            id="characterImage"
+        >
+
+        <img
+            src="mouth.png"
+            class="mouth"
+            id="mouth"
+        >
+
+    </div>
+
+    <!-- QUẠT -->
+
+    <div class="fan" id="fan">
+
+        <div class="fan-head">
+
+            <!-- LOGO -->
+
+            <div class="fan-logo">
+                ONINME
+            </div>
+
+            <!-- CÁNH QUẠT -->
+
+            <div
+                class="blades"
+                id="blades"
+            >
+
+                <div class="blade"></div>
+                <div class="blade"></div>
+                <div class="blade"></div>
+
+                <div class="fan-center"></div>
+
+            </div>
+
+            <!-- LỒNG -->
+
+            <div class="grill"></div>
+
+        </div>
+
+        <!-- CHÂN -->
+
+        <div class="stand"></div>
+
+        <!-- ĐẾ -->
+
+        <div class="base"></div>
+
+    </div>
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+        <button onclick="startMicrophone()">
+            Bật Micro
+        </button>
+
+        <button onclick="stopMicrophone()">
+            Tắt Micro
+        </button>
+
+        <button onclick="resetMouth()">
+            Reset Mouth
+        </button>
+
+        <button onclick="resetFan()">
+            Reset Fan
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+   DOM
+========================= */
+
+const mouth =
+    document.getElementById("mouth");
+
+const blades =
+    document.getElementById("blades");
+
+const character =
+    document.getElementById("character");
+
+const characterImage =
+    document.getElementById("characterImage");
+
+const fan =
+    document.getElementById("fan");
+
+/* =========================
+   AUDIO
+========================= */
+
+let audioContext;
+let analyser;
+let microphone;
+let dataArray;
+let animationId;
+let micStream;
+
+/* =========================
+   QUẠT QUAY 1 CHIỀU
+========================= */
+
+let fanAngle = 0;
+
+let lastTime =
+    performance.now();
+
+/* =========================
+   IDLE NHÂN VẬT
+========================= */
+
+const idleFrames = [
+
+    "idle1.png",
+    "idle2.png",
+    "idle3.png",
+    "idle4.png"
+];
+
+let idleIndex = 0;
+
+setInterval(function(){
+
+    idleIndex++;
+
+    if(idleIndex >= idleFrames.length){
+
+        idleIndex = 0;
+    }
+
+    characterImage.src =
+        idleFrames[idleIndex];
+
+},180);
+
+/* =========================
+   MOUTH
+========================= */
+
+let mouthX = 202;
+let mouthY = 200;
+
+let mouthScale = 1;
+let talkingScale = 1;
+
+let draggingMouth = false;
+
+let mouthOffsetX = 0;
+let mouthOffsetY = 0;
+
+/* UPDATE MOUTH */
+
+function updateMouthPosition(){
+
+    mouth.style.left =
+        mouthX + "px";
+
+    mouth.style.top =
+        mouthY + "px";
+}
+
+function updateMouthTransform(){
+
+    mouth.style.transform =
+
+        `translate(-50%,0)
+         scaleX(${mouthScale})
+         scaleY(${talkingScale * mouthScale})`;
+}
+
+/* KÉO MOUTH */
+
+mouth.addEventListener(
+    "mousedown",
+    function(e){
+
+        draggingMouth = true;
+
+        draggingFan = false;
+
+        const rect =
+            mouth.getBoundingClientRect();
+
+        mouthOffsetX =
+            e.clientX - rect.left;
+
+        mouthOffsetY =
+            e.clientY - rect.top;
+
+        e.stopPropagation();
+
+        e.preventDefault();
+    }
+);
+
+/* ZOOM MOUTH */
+
+mouth.addEventListener(
+    "wheel",
+    function(e){
+
+        e.preventDefault();
+
+        if(e.deltaY < 0){
+
+            mouthScale += 0.05;
+
+        }else{
+
+            mouthScale -= 0.05;
+        }
+
+        if(mouthScale < 0.1){
+
+            mouthScale = 0.1;
+        }
+
+        if(mouthScale > 10){
+
+            mouthScale = 10;
+        }
+
+        updateMouthTransform();
+
+    },
+    { passive:false }
+);
+
+/* RESET MOUTH */
+
+function resetMouth(){
+
+    mouthX = 202;
+    mouthY = 200;
+
+    mouthScale = 1;
+    talkingScale = 1;
+
+    updateMouthPosition();
+    updateMouthTransform();
+}
+
+/* =========================
+   QUẠT
+========================= */
+
+let fanX = -550;
+let fanY = 0;
+
+let fanScale = 1;
+
+let draggingFan = false;
+
+let fanOffsetX = 0;
+let fanOffsetY = 0;
+
+/* UPDATE QUẠT */
+
+function updateFanPosition(){
+
+    fan.style.transform =
+
+        `translate(${fanX}px, ${fanY}px)
+         scale(${fanScale})`;
+}
+
+/* KÉO QUẠT */
+
+fan.addEventListener(
+    "mousedown",
+    function(e){
+
+        draggingFan = true;
+
+        draggingMouth = false;
+
+        fanOffsetX =
+            e.clientX - fanX;
+
+        fanOffsetY =
+            e.clientY - fanY;
+
+        e.preventDefault();
+    }
+);
+
+/* ZOOM QUẠT */
+
+fan.addEventListener(
+    "wheel",
+    function(e){
+
+        e.preventDefault();
+
+        if(e.deltaY < 0){
+
+            fanScale += 0.05;
+
+        }else{
+
+            fanScale -= 0.05;
+        }
+
+        if(fanScale < 0.1){
+
+            fanScale = 0.1;
+        }
+
+        if(fanScale > 10){
+
+            fanScale = 10;
+        }
+
+        updateFanPosition();
+
+    },
+    { passive:false }
+);
+
+/* RESET QUẠT */
+
+function resetFan(){
+
+    fanX = -550;
+    fanY = 0;
+
+    fanScale = 1;
+
+    updateFanPosition();
+}
+
+/* =========================
+   MOUSE MOVE
+========================= */
+
+document.addEventListener(
+    "mousemove",
+    function(e){
+
+        if(draggingMouth){
+
+            const parentRect =
+                character.getBoundingClientRect();
+
+            mouthX =
+
+                e.clientX
+                - parentRect.left
+                - mouthOffsetX
+                + mouth.offsetWidth / 2;
+
+            mouthY =
+
+                e.clientY
+                - parentRect.top
+                - mouthOffsetY;
+
+            updateMouthPosition();
+        }
+
+        if(draggingFan){
+
+            fanX =
+                e.clientX - fanOffsetX;
+
+            fanY =
+                e.clientY - fanOffsetY;
+
+            updateFanPosition();
+        }
+    }
+);
+
+/* MOUSE UP */
+
+document.addEventListener(
+    "mouseup",
+    function(){
+
+        draggingMouth = false;
+
+        draggingFan = false;
+    }
+);
+
+/* =========================
+   MICROPHONE
+========================= */
+
+async function startMicrophone(){
+
+    try{
+
+        if(micStream){
+
+            micStream
+            .getTracks()
+            .forEach(track => track.stop());
+        }
+
+        micStream =
+
+            await navigator
+            .mediaDevices
+            .getUserMedia({
+                audio:true
+            });
+
+        audioContext =
+            new AudioContext();
+
+        analyser =
+            audioContext.createAnalyser();
+
+        microphone =
+
+            audioContext
+            .createMediaStreamSource(
+                micStream
+            );
+
+        microphone.connect(analyser);
+
+        analyser.fftSize = 1024;
+
+        dataArray =
+
+            new Uint8Array(
+                analyser.fftSize
+            );
+
+        cancelAnimationFrame(
+            animationId
+        );
+
+        lastTime =
+            performance.now();
+
+        animateByMicrophone();
+
+    }catch(error){
+
+        alert(
+            "Không bật được microphone"
+        );
+    }
+}
+
+/* TẮT MICRO */
+
+function stopMicrophone(){
+
+    cancelAnimationFrame(
+        animationId
+    );
+
+    if(micStream){
+
+        micStream
+        .getTracks()
+        .forEach(track => track.stop());
+    }
+
+    talkingScale = 1;
+
+    updateMouthTransform();
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+function animateByMicrophone(){
+
+    analyser.getByteTimeDomainData(
+        dataArray
+    );
+
+    let sum = 0;
+
+    for(
+        let i = 0;
+        i < dataArray.length;
+        i++
+    ){
+
+        let value =
+
+            (dataArray[i] - 128)
+            / 128;
+
+        sum += Math.abs(value);
+    }
+
+    let average =
+        sum / dataArray.length;
+
+    /* NHÉP MIỆNG */
+
+    talkingScale =
+
+        1 + average * 12;
+
+    if(talkingScale < 1){
+
+        talkingScale = 1;
+    }
+
+    if(talkingScale > 3){
+
+        talkingScale = 3;
+    }
+
+    updateMouthTransform();
+
+    /* TỐC ĐỘ QUẠT */
+
+    let speed =
+
+        0.02 + average * 3;
+
+    if(speed < 0.02){
+
+        speed = 0.02;
+    }
+
+    if(speed > 3){
+
+        speed = 3;
+    }
+
+    /* QUẠT TĂNG TỐC MẠNH */
+
+    let now =
+        performance.now();
+
+    let deltaTime =
+
+        (now - lastTime)
+        / 1000;
+
+    lastTime = now;
+
+    let rotationSpeed =
+
+        speed * 1200;
+
+    fanAngle +=
+
+        rotationSpeed
+        * deltaTime;
+
+    blades.style.transform =
+
+        `rotate(${fanAngle}deg)`;
+
+    animationId =
+
+        requestAnimationFrame(
+            animateByMicrophone
+        );
+}
+
+/* =========================
+   KHỞI ĐỘNG
+========================= */
+
+updateMouthPosition();
+
+updateMouthTransform();
+
+updateFanPosition();
+
+</script>
+
+</body>
+</html>
