@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nhân Vật + Quạt Theo Microphone</title>
+<title>ONINME Fan Microphone</title>
 
 <style>
+
 body{
     margin:0;
+    overflow:hidden;
+
+    width:100vw;
+    height:100vh;
+
     background-image:url("background.png");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    overflow:hidden;
-    width:100vw;
-    height:100vh;
+
     font-family:Arial,sans-serif;
+
     touch-action:none;
 }
 
@@ -26,20 +31,26 @@ body{
 }
 
 /* =========================
-   NHÂN VẬT
+   CHARACTER
 ========================= */
 
 .character{
     position:absolute;
+
     left:35%;
     top:50%;
+
     width:min(42vw,420px);
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
 }
 
 .character-img{
     width:100%;
+
     display:block;
+
     user-select:none;
     pointer-events:none;
 }
@@ -59,15 +70,15 @@ body{
 
     transform-origin:center center;
 
-    cursor:move;
-
     z-index:20;
+
+    cursor:move;
 
     touch-action:none;
 }
 
 /* =========================
-   QUẠT
+   FAN
 ========================= */
 
 .fan{
@@ -79,12 +90,14 @@ body{
     width:min(26vw,260px);
     height:min(36vw,360px);
 
-    cursor:move;
-
     transform-origin:center center;
+
+    cursor:move;
 
     touch-action:none;
 }
+
+/* FAN HEAD */
 
 .fan-head{
     position:absolute;
@@ -101,7 +114,8 @@ body{
 
     border:8px solid #444;
 
-    background:rgba(220,220,220,0.9);
+    background:
+        rgba(220,220,220,0.9);
 
     display:flex;
     justify-content:center;
@@ -134,7 +148,7 @@ body{
         1px 1px 2px rgba(255,255,255,0.8);
 }
 
-/* LỒNG QUẠT */
+/* GRILL */
 
 .grill{
     position:absolute;
@@ -145,20 +159,20 @@ body{
     border-radius:50%;
 
     background:
-    repeating-radial-gradient(
-        circle,
-        transparent 0px,
-        transparent 10px,
-        rgba(0,0,0,0.15) 11px,
-        rgba(0,0,0,0.15) 12px
-    );
+        repeating-radial-gradient(
+            circle,
+            transparent 0px,
+            transparent 10px,
+            rgba(0,0,0,0.15) 11px,
+            rgba(0,0,0,0.15) 12px
+        );
 
     z-index:5;
 
     pointer-events:none;
 }
 
-/* CÁNH QUẠT */
+/* BLADES */
 
 .blades{
     position:relative;
@@ -169,7 +183,7 @@ body{
     transform:rotate(0deg);
 }
 
-/* CÁNH */
+/* BLADE */
 
 .blade{
     position:absolute;
@@ -199,7 +213,7 @@ body{
     transform:rotate(240deg);
 }
 
-/* TÂM */
+/* CENTER */
 
 .fan-center{
     position:absolute;
@@ -217,7 +231,7 @@ body{
     z-index:10;
 }
 
-/* CHÂN */
+/* STAND */
 
 .stand{
     position:absolute;
@@ -233,7 +247,7 @@ body{
     transform:translateX(-50%);
 }
 
-/* ĐẾ */
+/* BASE */
 
 .base{
     position:absolute;
@@ -263,15 +277,14 @@ body{
 
     transform:translateX(-50%);
 
-    background:rgba(255,255,255,0.9);
+    background:
+        rgba(255,255,255,0.9);
 
     padding:15px;
 
     border-radius:15px;
 
     border:3px solid #222;
-
-    text-align:center;
 
     z-index:100;
 }
@@ -283,8 +296,6 @@ button{
 
     margin:5px;
 
-    cursor:pointer;
-
     border:none;
 
     border-radius:10px;
@@ -294,10 +305,8 @@ button{
     color:white;
 
     font-weight:bold;
-}
 
-button:hover{
-    background:#197fe0;
+    cursor:pointer;
 }
 
 /* =========================
@@ -309,6 +318,7 @@ button:hover{
     .character{
         left:50%;
         top:58%;
+
         width:60vw;
     }
 
@@ -371,13 +381,12 @@ button:hover{
     }
 
     .controls{
-        bottom:10px;
-
         transform:
             translateX(-50%)
-            scale(0.78);
+            scale(0.75);
     }
 }
+
 </style>
 </head>
 
@@ -385,7 +394,7 @@ button:hover{
 
 <div class="scene">
 
-    <!-- NHÂN VẬT -->
+    <!-- CHARACTER -->
 
     <div class="character" id="character">
 
@@ -403,7 +412,7 @@ button:hover{
 
     </div>
 
-    <!-- QUẠT -->
+    <!-- FAN -->
 
     <div class="fan" id="fan">
 
@@ -436,7 +445,7 @@ button:hover{
 
     </div>
 
-    <!-- CONTROLS -->
+    <!-- BUTTONS -->
 
     <div class="controls">
 
@@ -469,6 +478,9 @@ button:hover{
 const mouth =
     document.getElementById("mouth");
 
+const fan =
+    document.getElementById("fan");
+
 const blades =
     document.getElementById("blades");
 
@@ -477,9 +489,6 @@ const character =
 
 const characterImage =
     document.getElementById("characterImage");
-
-const fan =
-    document.getElementById("fan");
 
 /* =========================
    AUDIO
@@ -493,7 +502,7 @@ let animationId;
 let micStream;
 
 /* =========================
-   QUẠT QUAY
+   FAN ROTATION
 ========================= */
 
 let fanAngle = 0;
@@ -502,11 +511,10 @@ let lastTime =
     performance.now();
 
 /* =========================
-   IDLE
+   IDLE ANIMATION
 ========================= */
 
 const idleFrames = [
-
     "idle1.png",
     "idle2.png",
     "idle3.png",
@@ -562,17 +570,13 @@ function updateMouthTransform(){
          scaleY(${talkingScale * mouthScale})`;
 }
 
-/* =========================
-   PC MOUTH
-========================= */
+/* PC DRAG */
 
 mouth.addEventListener(
     "mousedown",
     function(e){
 
         draggingMouth = true;
-
-        draggingFan = false;
 
         const rect =
             mouth.getBoundingClientRect();
@@ -587,7 +591,7 @@ mouth.addEventListener(
     }
 );
 
-/* ZOOM */
+/* PC ZOOM */
 
 mouth.addEventListener(
     "wheel",
@@ -604,15 +608,11 @@ mouth.addEventListener(
             mouthScale -= 0.05;
         }
 
-        if(mouthScale < 0.1){
-
+        if(mouthScale < 0.1)
             mouthScale = 0.1;
-        }
 
-        if(mouthScale > 10){
-
+        if(mouthScale > 10)
             mouthScale = 10;
-        }
 
         updateMouthTransform();
 
@@ -620,9 +620,7 @@ mouth.addEventListener(
     { passive:false }
 );
 
-/* =========================
-   MOBILE TOUCH MOUTH
-========================= */
+/* MOBILE TOUCH */
 
 let lastTouchDistance = 0;
 
@@ -672,7 +670,7 @@ mouth.addEventListener(
         const parentRect =
             character.getBoundingClientRect();
 
-        /* DI CHUYỂN */
+        /* MOVE */
 
         if(e.touches.length === 1){
 
@@ -717,15 +715,11 @@ mouth.addEventListener(
                     mouthScale -= 0.03;
                 }
 
-                if(mouthScale < 0.1){
-
+                if(mouthScale < 0.1)
                     mouthScale = 0.1;
-                }
 
-                if(mouthScale > 10){
-
+                if(mouthScale > 10)
                     mouthScale = 10;
-                }
 
                 updateMouthTransform();
             }
@@ -785,7 +779,7 @@ function resetMouth(){
 }
 
 /* =========================
-   QUẠT
+   FAN
 ========================= */
 
 let fanX = 0;
@@ -806,7 +800,7 @@ function updateFanPosition(){
          scale(${fanScale})`;
 }
 
-/* PC */
+/* PC FAN */
 
 fan.addEventListener(
     "mousedown",
@@ -824,7 +818,30 @@ fan.addEventListener(
     }
 );
 
-/* ZOOM */
+/* MOBILE FAN */
+
+fan.addEventListener(
+    "touchstart",
+    function(e){
+
+        e.preventDefault();
+
+        draggingFan = true;
+
+        const touch =
+            e.touches[0];
+
+        fanOffsetX =
+            touch.clientX - fanX;
+
+        fanOffsetY =
+            touch.clientY - fanY;
+
+    },
+    { passive:false }
+);
+
+/* FAN ZOOM */
 
 fan.addEventListener(
     "wheel",
@@ -841,23 +858,11 @@ fan.addEventListener(
             fanScale -= 0.05;
         }
 
-        if(fanScale < 0.1){
-
-            fanScale = 0.1;
-        }
-
-        if(fanScale > 10){
-
-            fanScale = 10;
-        }
-
         updateFanPosition();
 
     },
     { passive:false }
 );
-
-/* RESET */
 
 function resetFan(){
 
@@ -870,7 +875,55 @@ function resetFan(){
 }
 
 /* =========================
-   MOUSE MOVE
+   CHARACTER MOVE
+========================= */
+
+let draggingCharacter = false;
+
+let characterX = 0;
+let characterY = 0;
+
+let characterOffsetX = 0;
+let characterOffsetY = 0;
+
+function updateCharacterPosition(){
+
+    character.style.transform =
+
+        `translate(-50%,-50%)
+         translate(${characterX}px, ${characterY}px)`;
+}
+
+/* TOUCH */
+
+character.addEventListener(
+    "touchstart",
+    function(e){
+
+        if(e.target === mouth) return;
+
+        e.preventDefault();
+
+        draggingCharacter = true;
+
+        const touch =
+            e.touches[0];
+
+        const rect =
+            character.getBoundingClientRect();
+
+        characterOffsetX =
+            touch.clientX - rect.left;
+
+        characterOffsetY =
+            touch.clientY - rect.top;
+
+    },
+    { passive:false }
+);
+
+/* =========================
+   GLOBAL MOVE
 ========================= */
 
 document.addEventListener(
@@ -908,15 +961,80 @@ document.addEventListener(
 
             updateFanPosition();
         }
+
     }
 );
+
+/* MOBILE MOVE */
+
+document.addEventListener(
+    "touchmove",
+    function(e){
+
+        /* CHARACTER */
+
+        if(
+            draggingCharacter &&
+            e.touches.length === 1
+        ){
+
+            const touch =
+                e.touches[0];
+
+            characterX =
+
+                touch.clientX
+                - window.innerWidth * 0.35
+                - characterOffsetX;
+
+            characterY =
+
+                touch.clientY
+                - window.innerHeight * 0.50
+                - characterOffsetY;
+
+            updateCharacterPosition();
+        }
+
+        /* FAN */
+
+        if(
+            draggingFan &&
+            e.touches.length === 1
+        ){
+
+            const touch =
+                e.touches[0];
+
+            fanX =
+                touch.clientX - fanOffsetX;
+
+            fanY =
+                touch.clientY - fanOffsetY;
+
+            updateFanPosition();
+        }
+
+    },
+    { passive:false }
+);
+
+/* RELEASE */
 
 document.addEventListener(
     "mouseup",
     function(){
 
         draggingMouth = false;
+        draggingFan = false;
+    }
+);
 
+document.addEventListener(
+    "touchend",
+    function(){
+
+        draggingCharacter = false;
         draggingFan = false;
     }
 );
@@ -1031,39 +1149,25 @@ function animateByMicrophone(){
     let average =
         sum / dataArray.length;
 
-    /* NHÉP */
+    /* MOUTH */
 
     talkingScale =
 
         1 + average * 12;
 
-    if(talkingScale < 1){
-
+    if(talkingScale < 1)
         talkingScale = 1;
-    }
 
-    if(talkingScale > 3){
-
+    if(talkingScale > 3)
         talkingScale = 3;
-    }
 
     updateMouthTransform();
 
-    /* TỐC ĐỘ QUẠT */
+    /* FAN */
 
     let speed =
 
         0.02 + average * 3;
-
-    if(speed < 0.02){
-
-        speed = 0.02;
-    }
-
-    if(speed > 3){
-
-        speed = 3;
-    }
 
     let now =
         performance.now();
@@ -1076,13 +1180,10 @@ function animateByMicrophone(){
     lastTime = now;
 
     let rotationSpeed =
-
         speed * 1200;
 
     fanAngle +=
-
-        rotationSpeed
-        * deltaTime;
+        rotationSpeed * deltaTime;
 
     blades.style.transform =
 
@@ -1100,10 +1201,9 @@ function animateByMicrophone(){
 ========================= */
 
 updateMouthPosition();
-
 updateMouthTransform();
-
 updateFanPosition();
+updateCharacterPosition();
 
 </script>
 
